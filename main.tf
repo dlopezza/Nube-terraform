@@ -29,17 +29,17 @@ module "private_subnet" {
 }
 
 module "ecs_cluster" {
-  source = "./ECS/cluster" 
+  source = "./ECS" 
 }
 
 module "ecs_task_definition" {
-  source = "./ECS/definition"
+  source = "./ECS"
   container_port = 3000
-  image_name = colingas/my-nextjs-app
+  image_name = "colingas/my-nextjs-app"
   container_name = "terraproject_containter"
 }
 
 module "ecs_service" {
-  source              = "./ECS/service"
+  source              = "./ECS"
   subnet_id           = module.private_subnet.private_subnet_id
 }

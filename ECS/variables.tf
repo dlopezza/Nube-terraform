@@ -20,3 +20,8 @@ variable "host_port" {
   type        = number
   default     = 80
 }
+
+variable "subnet_id" {
+  description = "Subnet to be used in ECS"
+  type        = string
+}
