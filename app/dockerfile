@@ -1,0 +1,26 @@
+# Use a lightweight Node.js base image for running
+FROM node:20-alpine
+
+# Set the working directory to /temp
+WORKDIR /temp
+
+# Install unzip utility
+RUN apk add --no-cache unzip
+
+# Copy the zip file into the container
+COPY output.zip ./
+
+# Unzip the contents directly into /temp and remove the zip file
+RUN unzip output.zip && rm output.zip
+
+# Install production dependencies based on the unzipped package.json
+RUN npm install --production
+
+# Set the PORT environment variable
+ENV PORT=3000
+
+# Expose the Next.js server port
+EXPOSE 3000
+
+# Start the Next.js application
+CMD ["npm", "start"]
