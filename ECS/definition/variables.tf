@@ -5,7 +5,7 @@ variable "container_name" {
 
 variable "image_name" {
   description = "The image name used in the iamge repository"
-  type        = number
+  type        = string
   default     = "nginx"
 }
 
