@@ -40,6 +40,6 @@ module "ecs_task_definition" {
 }
 
 module "ecs_service" {
-  source              = "./ECS/ecs_service"
+  source              = "./ECS/service"
   subnet_id           = module.private_subnet.private_subnet_id
 }
