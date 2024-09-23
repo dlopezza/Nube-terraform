@@ -1,5 +1,5 @@
 resource "aws_security_group" "ecs_service_sg" {
-  name        = "ecs_service_security_group"
+  name        = "ecs_service_sg"
   description = "Security group for ECS service"
 
   ingress {

@@ -1,6 +1,7 @@
 variable "container_name" {
   description = "The container name for the webapp"
   type        = string
+  default     = "terraproject_container"
 }
 
 variable "image_name" {
@@ -18,5 +19,5 @@ variable "container_port" {
 variable "host_port" {
   description = "Port to use both in the host and container"
   type        = number
-  default     = 80
+  default     = 3000
 }

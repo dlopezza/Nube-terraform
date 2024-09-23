@@ -35,6 +35,7 @@ module "ecs_cluster" {
 module "ecs_task_definition" {
   source = "./ECS/definition"
   container_port = 3000
+  host_port = 3000
   image_name = colingas/my-nextjs-app
   container_name = "terraproject_containter"
 }
@@ -42,4 +43,6 @@ module "ecs_task_definition" {
 module "ecs_service" {
   source              = "./ECS/service"
   subnet_id           = module.private_subnet.private_subnet_id
+  cluster_id          = module.ecs_cluster.cluster_id
+  ecs_task_arn        = module.ecs_task_definition.ecs_task_arn
 }
