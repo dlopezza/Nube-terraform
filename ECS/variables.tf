@@ -1,7 +1,6 @@
 variable "container_name" {
   description = "The container name for the webapp"
   type        = string
-  default     = ""
 }
 
 variable "image_name" {
