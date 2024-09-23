@@ -8,6 +8,6 @@ resource "aws_ecs_service" "ecs_service" {
   network_configuration {
     subnets          = [var.subnet_id]  # Replace with your subnet ID
     security_groups  = [aws_security_group.ecs_service_sg.id]  # Replace with your security group ID
-    assign_public_ip = "ENABLED"  # Use "DISABLED" if not needed
+    assign_public_ip = true 
   }
 }
