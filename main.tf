@@ -45,4 +45,5 @@ module "ecs_service" {
   subnet_id           = module.private_subnet.private_subnet_id
   cluster_id          = module.ecs_cluster.cluster_id
   ecs_task_arn        = module.ecs_task_definition.ecs_task_arn
+  vpc_id              = module.vpc.vpc_id
 }

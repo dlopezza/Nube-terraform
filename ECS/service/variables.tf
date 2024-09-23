@@ -12,3 +12,8 @@ variable "ecs_task_arn"{
   description = "arn of the ecs task definition"
   type        = string
 }
+
+variable "vpc_id"{
+  description = "id of the vpc"
+  type        = string
+}

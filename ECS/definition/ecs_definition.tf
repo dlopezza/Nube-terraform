@@ -22,7 +22,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
     ]
   }
 ]
-DEFINITION
+TASK_DEFINITION
 
   runtime_platform {
     operating_system_family = "LINUX"  # Update to match your environment (e.g., "WINDOWS_SERVER_2019_CORE" if using Windows)
