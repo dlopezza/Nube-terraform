@@ -30,6 +30,7 @@ module "private_subnet" {
 
 module "ecs_cluster" {
   source = "./ECS" 
+  
 }
 
 module "ecs_task_definition" {
