@@ -36,7 +36,7 @@ module "ecs_task_definition" {
   source = "./ECS/definition"
   container_port = 3000
   host_port = 3000
-  image_name = colingas/my-nextjs-app
+  image_name = "colingas/my-nextjs-app"
   container_name = "terraproject_containter"
 }
 
