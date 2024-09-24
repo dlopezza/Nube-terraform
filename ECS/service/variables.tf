@@ -13,7 +13,17 @@ variable "ecs_task_arn"{
   type        = string
 }
 
-variable "vpc_id"{
-  description = "id of the vpc"
+variable "ecs_ami"{
+  description = "ami to use in the EC2"
   type        = string
 }
+
+variable "ecs_instance_type"{
+  description = "instance type to use in the EC2"
+  type        = string
+}
+
+#variable "vpc_id"{
+#  description = "id of the vpc"
+#  type        = string
+#}
