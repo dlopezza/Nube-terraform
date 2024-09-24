@@ -47,5 +47,5 @@ module "ecs_service" {
   ecs_task_arn        = module.ecs_task_definition.ecs_task_arn
   vpc_id              = module.vpc.vpc_id
   ecs_ami             = "ami-07ae7190a74b334a0"
-  ecs_instance_type   = "t2.micro"
+  ecs_instance_type   = "t2.medium"
 }
