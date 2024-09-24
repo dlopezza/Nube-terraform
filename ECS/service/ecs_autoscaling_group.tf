@@ -1,4 +1,4 @@
-.resource "aws_autoscaling_group" "ecs_asg" {
+resource "aws_autoscaling_group" "ecs_asg" {
   desired_capacity     = 1  # Set the number of instances you want
   max_size             = 1
   min_size             = 1
