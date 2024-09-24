@@ -1,7 +1,7 @@
 resource "aws_ecs_task_definition" "ecs_task" {
   family                   = "terraproject_family"
   requires_compatibilities = ["EC2"]  # Use "EC2" if not using Fargate
-  network_mode             = "awsvpc"      # Required for Fargate
+  network_mode             = "awsvpc"  # Required for Fargate
   cpu                      = 1024
   memory                   = 2048
 
@@ -24,7 +24,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
       "logDriver": "awslogs",
       "options": {
         "awslogs-group": "${aws_cloudwatch_log_group.ecs_log_group.name}",
-        "awslogs-region": "us-east-1",  # Specify your region
+        "awslogs-region": "us-east-1",
         "awslogs-stream-prefix": "ecs"
       }
     }
