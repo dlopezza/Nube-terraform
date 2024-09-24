@@ -30,7 +30,6 @@ module "private_subnet" {
 
 module "ecs_cluster" {
   source = "./ECS/cluster" 
-  autoscaling_group_arn = module.ecs_service.auto_scaling_group_arn
 }
 
 module "ecs_task_definition" {
@@ -41,6 +40,12 @@ module "ecs_task_definition" {
   container_name = "terraproject_containter2"
 }
 
+module "capacity_provider"{
+  source "./ECS/capacity_provider"
+  autoscaling_group_arn = module.ecs_service.auto_scaling_group_arn
+
+}
+
 module "ecs_service" {
   source              = "./ECS/service"
   subnet_id           = module.public_subnet.public_subnet_id
@@ -49,5 +54,5 @@ module "ecs_service" {
   vpc_id              = module.vpc.vpc_id
   ecs_ami             = "ami-07ae7190a74b334a0"
   ecs_instance_type   = "t3.micro"
-  capacity_provider_name   = module.ecs_cluster.capacity_provider_name
+  capacity_provider_name   = module.capacity_provider.capacity_provider_name
 }
