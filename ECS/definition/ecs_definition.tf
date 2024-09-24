@@ -1,9 +1,9 @@
 resource "aws_ecs_task_definition" "ecs_task" {
   family                   = "terraproject_family"
-  requires_compatibilities = ["EC2"]  # Use "FARGATE" for Fargate launch type
-  network_mode             = "awsvpc"      # Required for Fargate
-  cpu                      = "1024"         # CPU value as a string
-  memory                   = "2048"         # Memory value as a string
+  requires_compatibilities = ["EC2"]
+  network_mode             = "bridge"  # This is fine for EC2 with bridge mode
+  cpu                      = "1024"
+  memory                   = "2048"
   execution_role_arn       = "arn:aws:iam::587298106973:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS"
 
   container_definitions = <<TASK_DEFINITION
@@ -32,9 +32,4 @@ resource "aws_ecs_task_definition" "ecs_task" {
   }
 ]
 TASK_DEFINITION
-
-  runtime_platform {
-    operating_system_family = "LINUX"  # Update to match your environment
-    cpu_architecture        = "X86_64"
-  }
 }
