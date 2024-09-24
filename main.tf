@@ -41,9 +41,8 @@ module "ecs_task_definition" {
 }
 
 module "capacity_provider"{
-  source "./ECS/capacity_provider"
+  source = "./ECS/capacity_provider"
   autoscaling_group_arn = module.ecs_service.auto_scaling_group_arn
-
 }
 
 module "ecs_service" {
