@@ -1,9 +1,11 @@
 resource "aws_ecs_task_definition" "ecs_task" {
   family                   = "terraproject_family"
-  requires_compatibilities = ["FARGATE"]  # Use "EC2" if not using Fargate
+  requires_compatibilities = ["EC2"]  # Use "EC2" if not using Fargate
   network_mode             = "awsvpc"      # Required for Fargate
   cpu                      = 1024
   memory                   = 2048
+  execution_role_arn        = aws_iam_role.ecs_task_execution_role.arn
+  task_role_arn             = aws_iam_role.ecs_task_execution_role.arn
 
   container_definitions = <<TASK_DEFINITION
 [
