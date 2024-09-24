@@ -5,11 +5,9 @@ resource "aws_autoscaling_group" "ecs_asg" {
   vpc_zone_identifier = [var.subnet_id]  # Use your public subnet ID
   launch_configuration = aws_launch_configuration.ecs_launch_configuration.id
 
-  tags = [
-    {
-      key                 = "Name"
-      value               = "ecs-instance"
-      propagate_at_launch = true
-    },
-  ]
+  tag {
+    key                 = "Name"
+    value               = "ecs-instance"
+    propagate_at_launch = true
+  }
 }
