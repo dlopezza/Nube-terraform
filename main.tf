@@ -37,7 +37,7 @@ module "ecs_task_definition" {
   container_port = 3000
   host_port = 3000
   image_name = "nginx"
-  container_name = "terraproject_containter"
+  container_name = "terraproject_containter2"
 }
 
 module "ecs_service" {
