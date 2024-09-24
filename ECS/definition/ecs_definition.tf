@@ -24,7 +24,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
       "logDriver": "awslogs",
       "options": {
         "awslogs-group": "${aws_cloudwatch_log_group.ecs_log_group.name}",
-        "awslogs-region": "${var.aws_region}",  # Specify your region
+        "awslogs-region": "us-east-1",  # Specify your region
         "awslogs-stream-prefix": "ecs"
       }
     }
