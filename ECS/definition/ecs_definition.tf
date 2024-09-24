@@ -4,6 +4,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
   network_mode             = "awsvpc"      # Required for Fargate
   cpu                      = "1024"         # CPU value as a string
   memory                   = "2048"         # Memory value as a string
+  execution_role_arn       = "arn:aws:iam::587298106973:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS"
 
   container_definitions = <<TASK_DEFINITION
 [
