@@ -2,7 +2,7 @@ resource "aws_ecs_capacity_provider" "ecs_capacity_provider" {
   name = "terraproject_capacity_provider"
 
   auto_scaling_group_provider {
-    auto_scaling_group_arn = aws_autoscaling_group.ecs_asg.arn
+    auto_scaling_group_arn = var.autoscaling_group_arn
 
     // Managed termination protection can be either ENABLED or DISABLED
     managed_termination_protection = "ENABLED"
