@@ -11,8 +11,8 @@ resource "aws_ecs_task_definition" "ecs_task" {
   {
     "name": "${var.container_name}",
     "image": "${var.image_name}",
-    "cpu": 1024,
-    "memory": 2048,
+    "cpu": 256,
+    "memory": 512,
     "essential": true,
     "portMappings": [
       {
