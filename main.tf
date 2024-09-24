@@ -49,7 +49,7 @@ module "autoscaling_group"{
 
 module "capacity_provider"{
   source = "./ECS/capacity_provider"
-  autoscaling_group_arn = module.ecs_service.auto_scaling_group_arn
+  autoscaling_group_arn = module.autoscaling_group.auto_scaling_group_arn
 }
 
 module "ecs_service" {
