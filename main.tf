@@ -30,7 +30,7 @@ module "private_subnet" {
 
 module "ecs_cluster" {
   source = "./ECS/cluster" 
-  auto_scaling_group_arn = module.ecs_service.auto_scaling_group_arn
+  autoscaling_group_arn = module.ecs_service.auto_scaling_group_arn
 }
 
 module "ecs_task_definition" {
