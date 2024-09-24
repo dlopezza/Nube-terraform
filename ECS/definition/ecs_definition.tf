@@ -19,7 +19,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
         "hostPort": ${var.host_port},
         "protocol": "tcp"
       }
-    ]
+    ],
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
