@@ -5,6 +5,11 @@ resource "aws_ecs_service" "ecs_service" {
   desired_count   = 1
   launch_type     = "EC2"  # Use "EC2" if not using Fargate
 
+  capacity_provider_strategy {
+    capacity_provider = var.capacity_provider_name
+    weight           = 1
+  }
+
  /* network_configuration {
     subnets          = [var.subnet_id]  # Replace with your subnet ID
     security_groups  = [aws_security_group.ecs_service_sg.id]  # Replace with your security group ID

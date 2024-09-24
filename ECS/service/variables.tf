@@ -27,3 +27,8 @@ variable "vpc_id"{
   description = "id of the vpc"
   type        = string
 }
+
+variable "capacity_provider_name"{
+  description = "name of the capacity provider"
+  type        = string
+}
