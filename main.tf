@@ -1,61 +1,93 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
+resource "aws_vpc" "vpc-terraproject" {
+
+ cidr_block           = "10.0.0.0/16"
+
+ enable_dns_hostnames = true
+
+ tags = {
+
+   name = "vpc-terraproject"
+
+ }
+
+}
+
+resource "aws_subnet" "public_subnet" {
+
+ vpc_id                  = aws_vpc.vpc-terraproject.id
+
+ cidr_block              = "10.0.1.0/24"
+
+ map_public_ip_on_launch = true
+
+ availability_zone       = "us-east-1"
+
+}
+
+
+resource "aws_subnet" "private_subnet" {
+
+ vpc_id                  = aws_vpc.vpc-terraproject.id
+
+ cidr_block              = "10.0.2.0/24"
+
+ availability_zone       = "us-east-1"
+
+}
+
+resource "aws_internet_gateway" "internet_gateway" {
+
+ vpc_id = aws_vpc.vpc-terraproject.id
+
+ tags = {
+
+   Name = "internet_gateway"
+
+ }
+
+}
+
+resource "aws_route_table" "route_table" {
+
+ vpc_id = aws_vpc.vpc-terraproject.id
+
+ route {
+
+   cidr_block = "0.0.0.0/0"
+
+   gateway_id = aws_internet_gateway.internet_gateway.id
+
+ }
+
+}
+
+
+
+resource "aws_route_table_association" "public_subnet_route" {
+
+ subnet_id      = aws_subnet.public_subnet.id
+
+ route_table_id = aws_route_table.route_table.id
+
+}
+
+resource "aws_security_group" "ecs_service_sg" {
+  name        = "ecs_service_sg"
+  description = "Security group for ECS service"
+  vpc_id      = aws_vpc.vpc-terraproject.id
+
+  ingress {
+    from_port   = 3000
+    to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"  # Allows all traffic
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
-# Configure the AWS Provider
-provider "aws" {
-  region = "us-east-1"
-}
-
-module "vpc" {
-  source = "./vpc"
- }
-
- module "public_subnet" {
-  source               = "./subnets/public"
-  vpc_id               = module.vpc.vpc_id 
-  public_subnet_cidr   = "10.0.1.0/24"
-}
-
-module "private_subnet" {
-  source               = "./subnets/private"
-  vpc_id               = module.vpc.vpc_id 
-  private_subnet_cidr  = "10.0.2.0/24"
-}
-
-module "ecs_cluster" {
-  source = "./ECS/cluster" 
-}
-
-module "ecs_task_definition" {
-  source = "./ECS/definition"
-  container_port = 3000
-  host_port = 3000
-  image_name = "nginx"
-  container_name = "terraproject_containter2"
-}
-
-module "autoscaling_group"{
-  source = "./ECS/autoscaling_group"
-  subnet_id           = module.public_subnet.public_subnet_id
-  ecs_ami             = "ami-07ae7190a74b334a0"
-  ecs_instance_type   = "t3.micro"
-}
-
-module "capacity_provider"{
-  source = "./ECS/capacity_provider"
-  autoscaling_group_arn = module.autoscaling_group.auto_scaling_group_arn
-}
-
-module "ecs_service" {
-  source              = "./ECS/service"
-  cluster_id          = module.ecs_cluster.cluster_id
-  ecs_task_arn        = module.ecs_task_definition.ecs_task_arn
-  vpc_id              = module.vpc.vpc_id
-  capacity_provider_name   = module.capacity_provider.capacity_provider_name
-}
