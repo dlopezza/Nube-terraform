@@ -167,7 +167,7 @@ resource "aws_lb_target_group" "ecs_tg" {
 }
 
 
-resource "aws_ecs_cluster" "ecs_cluster" {
+resource "aws_ecs_cluster" "my-ecs-cluster" {
   name = "my-ecs-cluster"
 }
 
