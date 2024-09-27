@@ -171,8 +171,8 @@ resource "aws_ecs_cluster" "ecs_cluster" {
   name = "my-ecs-cluster"
 }
 
-resource "aws_ecs_capacity_provider" "ecs_capacity_provider" {
-  name = "ecs_capacity_provider"
+resource "aws_ecs_capacity_provider" "capacity_provider" {
+  name = "capacity_provider"
 
   auto_scaling_group_provider {
     auto_scaling_group_arn = aws_autoscaling_group.ecs_asg.arn
@@ -239,7 +239,7 @@ resource "aws_ecs_service" "ecs_service" {
   }
 
   capacity_provider_strategy {
-    capacity_provider = aws_ecs_capacity_provider.ecs_capacity_provider.name
+    capacity_provider = aws_ecs_capacity_provider.capacity_provider.name
     weight            = 100
   }
 
