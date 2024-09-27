@@ -81,11 +81,13 @@ resource "aws_security_group" "ecs_service_sg" {
   }
 }
 
+
+
 resource "aws_launch_template" "ecs_lt" {
   name_prefix   = "ecs-template"
   image_id      = "ami-01efd9ed777fe2e7f"
   instance_type = "t3.micro"
-  key_name               = "ec2ecsglog"
+  key_name               = "vockey"
   vpc_security_group_ids = [aws_security_group.ecs_service_sg.id]
 
   block_device_mappings {
