@@ -85,13 +85,8 @@ resource "aws_launch_template" "ecs_lt" {
   name_prefix   = "ecs-template"
   image_id      = "ami-062c116e449466e7f"
   instance_type = "t3.micro"
-
   key_name               = "ec2ecsglog"
   vpc_security_group_ids = [aws_security_group.ecs_service_sg.id]
-
-  iam_instance_profile {
-    name = "ecsInstanceRole"
-  }
 
   block_device_mappings {
     device_name = "/dev/xvda"
@@ -193,7 +188,6 @@ resource "aws_ecs_capacity_provider" "ecs_capacity_provider" {
 resource "aws_ecs_task_definition" "ecs_task_definition" {
   family             = "my-ecs-task"
   network_mode       = "awsvpc"
-  execution_role_arn = "arn:aws:iam::532199187081:role/ecsTaskExecutionRole"
   cpu                = 256
 
   runtime_platform {
